@@ -14,7 +14,7 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
       <x>10</x>
@@ -54,10 +54,10 @@
           </widget>
          </item>
          <item>
-          <widget class="QLineEdit" name="lineEdit"/>
+          <widget class="QLineEdit" name="editExcelFilePath1"/>
          </item>
          <item>
-          <widget class="QPushButton" name="pushButton">
+          <widget class="QPushButton" name="btnBrowser1">
            <property name="text">
             <string>浏览</string>
            </property>
@@ -81,10 +81,10 @@
           </widget>
          </item>
          <item>
-          <widget class="QLineEdit" name="lineEdit_2"/>
+          <widget class="QLineEdit" name="editExcelFilePath2"/>
          </item>
          <item>
-          <widget class="QPushButton" name="pushButton_2">
+          <widget class="QPushButton" name="btnBrowser2">
            <property name="text">
             <string>浏览</string>
            </property>
@@ -103,15 +103,15 @@
             </sizepolicy>
            </property>
            <property name="text">
-            <string>表3 薪资明细表2.0 (造册)：</string>
+            <string>表3 薪资明细表(造册)：    </string>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QLineEdit" name="lineEdit_3"/>
+          <widget class="QLineEdit" name="editExcelFilePath3"/>
          </item>
          <item>
-          <widget class="QPushButton" name="pushButton_3">
+          <widget class="QPushButton" name="btnBrowser3">
            <property name="text">
             <string>浏览</string>
            </property>
@@ -124,13 +124,13 @@
      <item row="1" column="0">
       <widget class="QTabWidget" name="tabWidget">
        <property name="currentIndex">
-        <number>2</number>
+        <number>1</number>
        </property>
        <widget class="QWidget" name="tab_1">
         <attribute name="title">
          <string>表1与表2对比</string>
         </attribute>
-        <widget class="QTableView" name="tableView">
+        <widget class="QTableView" name="tableView1">
          <property name="geometry">
           <rect>
            <x>0</x>
@@ -140,7 +140,7 @@
           </rect>
          </property>
         </widget>
-        <widget class="QPushButton" name="pushButton_4">
+        <widget class="QPushButton" name="btnCheck1">
          <property name="geometry">
           <rect>
            <x>350</x>
@@ -158,7 +158,7 @@
         <attribute name="title">
          <string>表2与表3对比</string>
         </attribute>
-        <widget class="QTableView" name="tableView_2">
+        <widget class="QTableView" name="tableView2">
          <property name="geometry">
           <rect>
            <x>0</x>
@@ -168,7 +168,7 @@
           </rect>
          </property>
         </widget>
-        <widget class="QPushButton" name="pushButton_5">
+        <widget class="QPushButton" name="btnCheck2">
          <property name="geometry">
           <rect>
            <x>350</x>
@@ -186,7 +186,7 @@
         <attribute name="title">
          <string>表2总和手工对比</string>
         </attribute>
-        <widget class="QPushButton" name="pushButton_6">
+        <widget class="QPushButton" name="btnCheck3">
          <property name="geometry">
           <rect>
            <x>350</x>
@@ -199,7 +199,7 @@
           <string>开始检查</string>
          </property>
         </widget>
-        <widget class="QWidget" name="">
+        <widget class="QWidget" name="layoutWidget">
          <property name="geometry">
           <rect>
            <x>70</x>
