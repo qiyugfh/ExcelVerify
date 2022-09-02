@@ -13,25 +13,32 @@ MainWindow::MainWindow(QWidget *parent)
     initUI();
 
     m_recentFilePath = "D:/";
+    m_excelVerify = new ExcelVerify();
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
+    delete m_excelVerify;
 }
 
 
 void MainWindow::initUI()
 {
+    ui->tabWidget->setCurrentIndex(0);
+
     connect(ui->btnBrowser1, SIGNAL(clicked()), this, SLOT(onBtnBrowserClicked1()));
     connect(ui->btnBrowser2, SIGNAL(clicked()), this, SLOT(onBtnBrowserClicked2()));
     connect(ui->btnBrowser3, SIGNAL(clicked()), this, SLOT(onBtnBrowserClicked3()));
+    connect(ui->btnCheck1, SIGNAL(clicked()), this, SLOT(onBtnCheck1()));
+    connect(ui->btnCheck2, SIGNAL(clicked()), this, SLOT(onBtnCheck2()));
+    connect(ui->btnCheck3, SIGNAL(clicked()), this, SLOT(onBtnCheck3()));
 }
 
 
 QString MainWindow::browseExcelFilePath(const QString &info)
 {
-    QString filePath = QFileDialog::getOpenFileName(this, info, m_recentFilePath, "Excel files(*.xlsx *.xls");
+    QString filePath = QFileDialog::getOpenFileName(this, info, m_recentFilePath, "Excel files (*.xls *.xlsx)");
     if(filePath.isEmpty())
     {
         return "";
@@ -76,14 +83,23 @@ void MainWindow::onBtnCheck1()
         return;
     }
 
-
+    m_excelVerify->checkExcelFile12(filePath1, filePath2);
 
 }
 
 
 void MainWindow::onBtnCheck2()
 {
+    QString filePath2 = ui->editExcelFilePath2->text().trimmed();
+    QString filePath3 = ui->editExcelFilePath3->text().trimmed();
 
+    if(false == checkFileExists(filePath2)
+    || false == checkFileExists(filePath3))
+    {
+        return;
+    }
+
+    m_excelVerify->checkExcelFile23(filePath2, filePath3);
 }
 
 
@@ -95,15 +111,23 @@ void MainWindow::onBtnCheck3()
 
 void MainWindow::showInfoMessageBox(const QString &info)
 {
-    QMessageBox::information(this, QString::fromLocal8Bit("提示信息"), info, QMessageBox::Yes);
+    QMessageBox::information(this, "提示信息", info, QMessageBox::Yes);
 }
 
 
  bool MainWindow::checkFileExists(const QString &filePath)
  {
+     if(filePath.isEmpty())
+     {
+         showInfoMessageBox("文件路径不能为空");
+         qWarning("empty file path");
+         return false;
+     }
+
      if(!QFileInfo::exists(filePath))
      {
-         showInfoMessageBox(QString::fromLocal8Bit(QString("Not exist file: %1").arg(filePath).toStdString().c_str()));
+         showInfoMessageBox(QString("错误的文件路径: %1").arg(filePath));
+         qWarning("not vaild file path:%s", filePath.toLocal8Bit().data());
          return false;
      }
 

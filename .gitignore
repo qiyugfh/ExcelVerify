@@ -1,2 +1,5 @@
 bin
+log
+debug
+release
 *.pro.user

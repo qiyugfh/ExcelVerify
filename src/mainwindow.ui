@@ -54,7 +54,11 @@
           </widget>
          </item>
          <item>
-          <widget class="QLineEdit" name="editExcelFilePath1"/>
+          <widget class="QLineEdit" name="editExcelFilePath1">
+           <property name="text">
+            <string>D:/测试数据/社保公积金结算单.xlsx</string>
+           </property>
+          </widget>
          </item>
          <item>
           <widget class="QPushButton" name="btnBrowser1">
@@ -81,7 +85,11 @@
           </widget>
          </item>
          <item>
-          <widget class="QLineEdit" name="editExcelFilePath2"/>
+          <widget class="QLineEdit" name="editExcelFilePath2">
+           <property name="text">
+            <string>D:/测试数据/薪资明细表.xlsx</string>
+           </property>
+          </widget>
          </item>
          <item>
           <widget class="QPushButton" name="btnBrowser2">
@@ -108,7 +116,11 @@
           </widget>
          </item>
          <item>
-          <widget class="QLineEdit" name="editExcelFilePath3"/>
+          <widget class="QLineEdit" name="editExcelFilePath3">
+           <property name="text">
+            <string>D:/测试数据/薪资明细表2.0.xlsx</string>
+           </property>
+          </widget>
          </item>
          <item>
           <widget class="QPushButton" name="btnBrowser3">
@@ -124,7 +136,7 @@
      <item row="1" column="0">
       <widget class="QTabWidget" name="tabWidget">
        <property name="currentIndex">
-        <number>1</number>
+        <number>0</number>
        </property>
        <widget class="QWidget" name="tab_1">
         <attribute name="title">
