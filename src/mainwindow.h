@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QTableWidget>
 #include "excelverify.h"
 
 
@@ -32,6 +33,16 @@ private:
     QString browseExcelFilePath(const QString &info);
     void showInfoMessageBox(const QString &info);
     bool checkFileExists(const QString &filePath);
+    void initTableWidget1();
+    void initTableWidget2();
+    void initTableWidgetStyle(QTableWidget *tw, const QStringList &labels);
+    void delDataFromTableWidget(QTableWidget *tw);
+    void addDataToTableWidget1();
+    void addDataToTableWidget2();
+    void insertTableWidgetItem(QTableWidget *tw, int row, int col, const QString &info, bool error = false);
+    void initTab3Form();
+    void resetTab3FormLabel();
+    void compareTab3FormInput();
 
 
 private:

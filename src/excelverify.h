@@ -5,11 +5,11 @@
 #include <QMap>
 #include <QVector>
 
-/*
-表1：社保公积金结算单
-表2：薪资明细表（从系统中导出的）
-表3：薪资明细表2.0（造册）
-*/
+
+const float CHECK_FLOAT_PRECISION = 0.001f;
+
+
+// 表1 社保公积金结算单,每行需要检查的列
 struct ExcelFile1RowStruct
 {
     QString gongHao;
@@ -27,6 +27,7 @@ struct ExcelFile1RowStruct
     float   geRenGongJiJin;
 };
 
+// 表2 薪资明细表（从系统中导出的）,每行需要检查的列
 struct ExcelFile2RowStruct
 {
     QString gongHao;
@@ -51,7 +52,63 @@ struct ExcelFile2RowStruct
     float   shiYeBaoXianYuanGongJiaoNa;
     float   daBingBaoXianYuanGongJiaoNa;
     float   gongJiJinYuanGongJiaoNa;
+};
 
+// 表3 薪资明细表2.0（造册）,每行需要检查的列
+struct ExcelFile3RowStruct
+{
+    QString gongHao;
+    QString xingMing;
+    float   tongXunBuTie;
+    float   dianNaoBuTie;
+    float   yongJinJiLi;
+    float   yeBanBuTie;
+    float   jiaBanBuTie;
+    float   qiTaBuTie;
+    float   buFaBuKou;
+};
+
+
+struct CheckCellResult
+{
+    float val;
+    bool  error;
+};
+
+
+struct ExcelFileCheckErrorRowStruct
+{
+    QString gongHao;
+    QString xingMing;
+    QVector<CheckCellResult> checkCellResults;
+};
+
+/*
+养老保险公司缴纳
+医疗保险公司缴纳
+生育保险公司缴纳
+失业保险公司缴纳
+工伤保险公司缴纳
+公积金公司缴纳
+养老保险员工缴纳
+医疗保险员工缴纳
+失业保险员工缴纳
+大病保险员工缴纳
+公积金员工缴纳
+*/
+struct ExcelFileColSumStruct
+{
+    float yangLaoBaoXianGongSiJiaoNa;
+    float yiLiaoBaoXianGongSiJiaoNa;
+    float shengYuBaoXianGongSiJiaoNa;
+    float shiYeBaoXianGongSiJiaoNa;
+    float gongShangBaoXianGongSiJiaoNa;
+    float gongJiJinBaoXianGongSiJiaoNa;
+    float yangLaoBaoXianYuanGongJiaoNa;
+    float yiLiaoBaoXianYuanGongJiaoNa;
+    float shiYeBaoXianYuanGongJiaoNa;
+    float daBingBaoXianYuanGongJiaoNa;
+    float gongJiJinYuanGongJiaoNa;
 };
 
 
@@ -68,13 +125,15 @@ public:
     // 表2中标黄的项与表3的相同项，按人逐个比较
     bool checkExcelFile23(const QString &excelFile2, const QString &excelFile3);
 
-    // 表1中标黄的项分别求出总和，并输出在每一列的列尾；同时与界面上手动输入的各项数据进行对比（界面上的数据来源于财务）
-    //bool checkExcelFile110(const QString &excelFile1);
+    // 表1中标黄的项分别求出总和
+    bool checkExcelFile110(const QString &excelFile1);
+
+public:
+    QVector<ExcelFileCheckErrorRowStruct> m_checkResultList1;
+    QVector<ExcelFileCheckErrorRowStruct> m_checkResultList2;
+    ExcelFileColSumStruct m_excelColSum;
 
 private:
-    void initMap1();
-    void initMap2();
-    void initMap3();
 
     // 读表1
     bool readExcelFile1(const QString &excelFile);
@@ -85,16 +144,17 @@ private:
     // 读表3
     bool readExcelFile3(const QString &excelFile);
 
+    bool checkFloatValueIsDiff(float val1, float val2);
+
+    bool writeCheckResult1ToFile();
+
 
 private:
 
-    QMap<QString, int> m_map1;
-    QMap<QString, int> m_map2;
-    QMap<QString, int> m_map3;
-
     QVector<ExcelFile1RowStruct> m_excelFileRowStructList1;
     QVector<ExcelFile2RowStruct> m_excelFileRowStructList2;
-    //QList<ExcelFile3Row> m_excelFileRowList3;
+    QVector<ExcelFile3RowStruct> m_excelFileRowStructList3;
+
 };
 
 #endif // EXCELVERIFY_H
